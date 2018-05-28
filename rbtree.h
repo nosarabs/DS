@@ -155,13 +155,17 @@ class rbtree{
         }
       }
       z->left = nil;
-      z->rigth = nil;
+      z->right = nil;
       z->color = RED;
-      fixUp(z);
+      iFixUp(z);
 	   };
 			// Inserta el nodo z en la posicion que le corresponde en el arbol.
 
 		rbnode<T>* treeDelete(rbnode<T>* z){
+      rbnode<T> * y = nil;
+      rbnode<T> * x = root;
+      enum colors yog = y->color;
+      if (z->left)
 		};
 			// Saca del arbol la llave contenida en el nodo apuntado por z.
 			// Devuelve la direccion del nodo eliminado para que se pueda
@@ -235,7 +239,7 @@ class rbtree{
       }
     };
 
-    void fixUp(rbnode<T> * z){
+    void iFixUp(rbnode<T> * z){
       rbnode<T> * y = nil;
       while (z->p != nil && z->p->color == RED){
         if (z->p == z->p->p->left){
@@ -275,11 +279,60 @@ class rbtree{
         }
       }
       root->color = BLACK;
-    }
+    };
 
     void leftRotate(rbnode<T>* x){
+      rbnode<T> * y = x->right;
+      x->right = y->left;
+      if (y->left != nil) {
+        y->left->p = x;
+      }
+      y->p = x->p;
+      if (x->p == nil) {
+        root = y;
+      } else {
+        if (x == x->p->left) {
+          x->p->left = y;
+        } else {
+          x->p->right = y;
+        }
+      }
+      y->left = x;
+      x->p = y;
+    };
 
-    }
+    void rightRotate(rbnode<T>* x){
+      rbnode<T> * y = x->left;
+      x->left = y->right;
+      if (y->right != nil) {
+        y->right->p = x;
+      }
+      y->p = x->p;
+      if (x->p == nil) {
+        root = y;
+      } else {
+        if (x == x->p->right) {
+          x->p->right = y;
+        } else {
+          x->p->left = y;
+        }
+      }
+      y->right = x;
+      x->p = y;
+    };
+
+    void transplant(rbnode<T>* u, rbnode<T>* v){
+      if (u->p == nil) {
+        root = v;
+      } else {
+        if (u == u->p->left) { // si es el menor
+          u->p->left = v;
+        } else {
+          u->p->right = v;
+        }
+      }
+      v->p = u->p;
+		};
 
 };
 

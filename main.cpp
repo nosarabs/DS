@@ -52,15 +52,24 @@ int main () {
 
   rbtree<int> r;
   //r.secTree(); // arbol de prueba
-  //rbnode<int> * x = new rbnode<int>;
+  rbnode<int> * x = new rbnode<int>(5);
+  rbnode<int> * y = new rbnode<int>(6);
+  r.treeInsert(x);
+  r.treeInsert(y);
+
+  r.inorderTreeWalk(r.getRoot(), s);
+  r.print(s);
+  
+  r.treeDelete(x);
   //x = r.treeSearch(2);
-  //r.inorderTreeWalk(r.getRoot(), s);
-  //r.print(s);
+  r.inorderTreeWalk(r.getRoot(), s);
+  r.print(s);
   //std::cout << '\n';
   //r.iterativeTreeSearch(7);
   //std::cout << r.treeMaximum()->key << '\n';
   //std::cout << r.treeMinimum()->key << '\n';
   //std::cout << r.treeSuccessor(x)->key << '\n';
+
 
 
 

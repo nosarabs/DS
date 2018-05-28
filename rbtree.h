@@ -32,7 +32,6 @@ class rbnode{
 		{};
 
 		~rbnode(){
-
 		}
 };
 
@@ -53,9 +52,9 @@ class rbtree{
 			// Constructor copia
 
 		~rbtree(){
-      // while (root) {
-      //   treeDelete(root);
-      // }
+      while (root != nil) {
+        treeDelete(root);
+      }
 		};
 			// Destructor (borra el arbol)
 
@@ -162,10 +161,37 @@ class rbtree{
 			// Inserta el nodo z en la posicion que le corresponde en el arbol.
 
 		rbnode<T>* treeDelete(rbnode<T>* z){
-      rbnode<T> * y = nil;
-      rbnode<T> * x = root;
-      enum colors yog = y->color;
-      if (z->left)
+      rbnode<T> * y = z;
+      rbnode<T> * x;
+      colors yog = y->color;
+      if (z->left == nil) {
+        x = z->right;
+        transplant(z, z->right);
+      } else {
+        if (z->right == nil) {
+          x = z->left;
+          transplant(z, z->left);
+        } else {
+          y = min(z->right);
+          yog = y->color;
+          x = y->right;
+          if (y->p == z) {
+            x->p = y;
+          } else {
+            transplant(y, y->right);
+            y->right = z->right;
+            y->right->p = y;
+          }
+          transplant(z, y);
+          y->left = z->left;
+          y->left->p = y;
+          y->color = z->color;
+        }
+      }
+      if (yog == BLACK) {
+        dFixUp(x);
+      }
+      return z;
 		};
 			// Saca del arbol la llave contenida en el nodo apuntado por z.
 			// Devuelve la direccion del nodo eliminado para que se pueda
@@ -333,6 +359,62 @@ class rbtree{
       }
       v->p = u->p;
 		};
+
+    void dFixUp(rbnode<T> * x) {
+      rbnode<T> * w;
+      while (x != root && x->color == BLACK) {
+        if (x == x->p->left) {
+          w = x->p->right;
+          if (w->color == RED) {
+            w->color = BLACK;
+            x->p->color = RED;
+            leftRotate(x->p);
+            w = x->p->right;
+          }
+          if (w->left->color == BLACK && w->right->color == BLACK) {
+            w->color = sED;
+            x = x->p;
+          } else {
+            if (w->right->color == BLACK) {
+              w->left->color = BLACK;
+              w->color = RED;
+              rightRotate(w);
+              w = x->p->right;
+            }
+            w->color = x->p->color;
+            x->p->color = BLACK;
+            w->right->color = BLACK;
+            leftRotate(x->p);
+            x = root;
+          }
+        } else {
+          w = x->p->left;
+          if (w->color == RED) {
+            w->color = BLACK;
+            x->p->color = RED;
+            rightRotate(x->p);
+            w = x->p->left;
+          }
+          if (w->right->color == BLACK && w->left->color == BLACK) {
+            w->color = RED;
+            x = x->p;
+          } else {
+            if (w->left->color == BLACK) {
+              w->right->color = BLACK;
+              w->color = RED;
+              leftRotate(w);
+              w = x->p->left;
+            }
+            w->color = x->p->color;
+            x->p->color = BLACK;
+            w->left->color = BLACK;
+            rightRotate(x->p);
+            x = root;
+          }
+        }
+      }
+      x->color = BLACK;
+    };
 
 };
 

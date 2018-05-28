@@ -9,10 +9,10 @@ class hasht{
 	public:
 		hasht(int nEntradas){
 		};
-			// Constructor que especifica el numero de cubetas (entradas) 
+			// Constructor que especifica el numero de cubetas (entradas)
 			// en la tabla
-			
-		hash(const hash<T>& obj){ 
+
+		hasht(const hash<T>& obj){ 
 		};
 			// Constructor copia
 
@@ -30,7 +30,7 @@ class hasht{
 
 	private:
 		int numEntradas;
-			// Nœmero de entradas en la tabla
+			// Nï¿½mero de entradas en la tabla
 		vector<list<T> > tabla;
 			// La tabla es un vector de listas de STL
 };

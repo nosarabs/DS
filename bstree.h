@@ -2,8 +2,9 @@
 #define BINARY_SEARCH_Tree
 #include <iostream>
 #include <stack>
-#define MAX 1000000
+#define MAX 10000
 using namespace std;
+
 // Nodos del arbol:
 template <typename T>
 class node{

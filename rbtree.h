@@ -5,7 +5,6 @@
 #define MAX 5
 using namespace std;
 
-
 enum colors {RED, BLACK};
 
 // Nodos del arbol:

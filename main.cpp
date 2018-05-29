@@ -8,7 +8,6 @@
 int main () {
 
   stack<int> s;
-  stack<int> s1;
   //
   // // PRUEBAS ARBOL
   //
@@ -28,25 +27,26 @@ int main () {
   // }
   // std::cout << conta << '\n';
 
-  rbtree<int> r;
-  r.secTree(); // arbol de prueba
+  // rbtree<int> r;
+  //r.secTree(); // arbol de prueba
   // rbnode<int> * x = new rbnode<int>(6);
   // rbnode<int> * y = new rbnode<int>(7);
   // rbnode<int> * z = new rbnode<int>(8);
   // r.treeInsert(x);
   // r.treeInsert(y);
   // r.treeInsert(z);
-
-  r.inorderTreeWalk(r.getRoot(), s);
-  r.print(s);
-
+  // r.inorderTreeWalk(r.getRoot(), s);
+  // r.print(s);
 
 
 
-  // hasht<int> x(5);
-  //
-  // hasht<int> h(x);
 
+  hasht<int> x(5);
+  x.insert(1);
+  x.insert(2);
+  x.insert(3);
+
+  hasht<int> h(x);
 
 
 }

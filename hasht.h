@@ -22,15 +22,31 @@ class hasht{
 			// Constructor copia
 
 		~hasht(){
+			for (int i = 0; i < numEntradas; ++i) {
+				tabla[i].clear();
+			}
 			tabla.clear();
 		};
 			// Destructor (borra la tabla)
 
 		T* search(const T& item){
+			T pos = item % numEntradas;
+			if (!tabla[pos].empty()){
+				typename list<T>::iterator i = tabla[pos].begin();
+				while (*i != item && i != tabla[pos].end()) {
+					i++;
+				}
+				if (*i == item) {
+					return &*i;
+				}
+			}
+			return NULL;
 		};
 			// Retorna un puntero a la llave o NULL si no se encuentra
 
 		void insert(const T& item){
+			T pos = item % numEntradas;
+			tabla[pos].push_back(item);
 		};
 			// Inserta el elemento en la tabla
 

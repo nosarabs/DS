@@ -51,17 +51,31 @@ class rbtree{
 			// Constructor (crea un arbol vacio)
 
 		rbtree(const rbtree<T>& obj){
+      nil = new rbnode<T>;
+      nil->p = nullptr;
+      nil->left = nullptr;
+      nil->right = nullptr;
+      nil->color = BLACK;
+      root = nil;
 
+      rbnode<T> * ptr = obj.getRoot();
+      stack<T> s;
+      copiar(ptr, s);
+      while (!s.empty()) {
+         rbnode<T> * n = new rbnode<T>;
+         n->key = s.top();
+         treeInsert(n);
+         s.pop();
+      }
 		};
 			// Constructor copia
 
 		~rbtree(){
       deleteTree(root);
-      std::cout << "ARBOL BORRADO" << '\n';
 		};
 			// Destructor (borra el arbol)
 
-		void inorderTreeWalk(rbnode<T>* x, stack<T> & pila){
+    void inorderTreeWalk(rbnode<T>* x, stack<T> & pila){
       if (x != nil) {
         inorderTreeWalk(x->left, pila);
         pila.push(x->key);
@@ -83,7 +97,7 @@ class rbtree{
             // contener las llaves de los nodos del subarbol (y su color)
             // ordenadas de mayor a menor.
 
-		rbnode<T>* treeSearch(const T& k){
+    rbnode<T>* treeSearch(const T& k){
       rbnode<T> * ptr = root;
       ptr = treeSearchRec(ptr, k);
       return ptr;
@@ -209,6 +223,14 @@ class rbtree{
 
 		rbnode<T> *root;	// raiz del arbol
 		rbnode<T> *nil;	    // nodo nil (hoja) del arbol
+
+    void copiar(rbnode<T>* x, stack<T> & pila){
+      if (x && (x->right != nullptr || x->left != nullptr)) {
+        copiar(x->right, pila);
+        copiar(x->left, pila);
+        pila.push(x->key);
+      }
+    };
 
     rbnode<T>* min(rbnode<T>* x){
       while (x->left != nil) {

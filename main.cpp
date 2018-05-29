@@ -1,35 +1,12 @@
 //#include "llist.h"
 //#include "bstree.h"
 #include "rbtree.h"
-//#include "hasht.h"
+#include "hasht.h"
 #include <stdio.h>
 #include <time.h>
 
 int main () {
 
-  // llist<int> l;
-
-  // PRUEBAS LISTA
-  // int num;
-  // for (int i = 0; i < MAX; ++i) {
-  //   num = rand() % (MAX * 2 + 1);
-  //   l.listInsert(new llnode<int>(num));
-  // }
-  //
-  //
-  // int conta = 0;
-  // int num1;
-  // long x = time(NULL);
-  // long y = x + 10;
-  // while (x < y) {
-  //   num1 = rand() % (MAX * 2 + 1);
-  //   l.listSearch(num1);
-  //   ++conta;
-  //   x = time(NULL);
-  // }
-  // std::cout << conta << '\n';
-
-  // tree<int> t;
   stack<int> s;
   //
   // // PRUEBAS ARBOL
@@ -61,13 +38,16 @@ int main () {
 
   r.inorderTreeWalk(r.getRoot(), s);
   r.print(s);
-  std::cout << r.getRoot()->color << '\n';
+  // std::cout << r.getRoot()->color << '\n';
+  //
+  // r.iterativeTreeSearch(7);
+  // std::cout << r.treeMaximum()->key << '\n';
+  // std::cout << r.treeMinimum()->key << '\n';
+  // std::cout << r.treeSuccessor(x)->key << '\n';
 
-  //r.iterativeTreeSearch(7);
-  //std::cout << r.treeMaximum()->key << '\n';
-  //std::cout << r.treeMinimum()->key << '\n';
-  //std::cout << r.treeSuccessor(x)->key << '\n';
-
+  // hasht<int> x(5);
+  //
+  // hasht<int> h(x);
 
 
 

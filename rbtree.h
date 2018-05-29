@@ -20,6 +20,7 @@ class rbnode{
 
 		// Constructor por omision.
 		rbnode(){
+
 		};
 
 		// Constructor por copia del nodo.
@@ -40,19 +41,23 @@ template <typename T>
 class rbtree{
 	public:
 		rbtree(){
-      nil = nullptr;
+      nil = new rbnode<T>;
+      nil->p = nullptr;
+      nil->left = nullptr;
+      nil->right = nullptr;
+      nil->color = BLACK;
       root = nil;
 		};
 			// Constructor (crea un arbol vacio)
 
 		rbtree(const rbtree<T>& obj){
-      nil = nullptr;
-      root = nil;
+
 		};
 			// Constructor copia
 
 		~rbtree(){
-
+      deleteTree(root);
+      std::cout << "ARBOL BORRADO" << '\n';
 		};
 			// Destructor (borra el arbol)
 
@@ -144,6 +149,7 @@ class rbtree{
       z->p = y;
       if (y == nil) {
         root = z;
+        root->color = BLACK;
       } else {
         if (z->key < y->key) {
           y->left = z;
@@ -234,42 +240,42 @@ class rbtree{
       }
     };
 
-    void fixUp(rbnode<T> * z){ // more like fux everything up .-.
-      while (z->p != nil && z->p->color == RED){
-        if (z->p == z->p->p->left){
-          rbnode<T>* y = z->p->p->right;
-          if (y->color == RED) {
-            z->p->color = BLACK;
-            y->color = BLACK;
-            z->p->p->color = RED;
-            z = z->p->p;
-          } else {
-            if (z == z->p->right) {
-              z = z->p;
-              leftRotate(z);
+    void fixUp(rbnode<T> * z){ // more like fuxUp everything .-.
+        while (z->p != nil && z->p->color == RED){
+          if (z->p == z->p->p->left){
+            rbnode<T>* y = z->p->p->right;
+            if (y->color == RED) {
+              z->p->color = BLACK;
+              y->color = BLACK;
+              z->p->p->color = RED;
+              z = z->p->p;
+            } else {
+              if (z == z->p->right) {
+                z = z->p;
+                leftRotate(z);
+              }
+              z->p->color = BLACK;
+              z->p->p->color = RED;
+              rightRotate(z->p->p);
             }
-            z->p->color = BLACK;
-            z->p->p->color = RED;
-            rightRotate(z->p->p);
-          }
-        } else {
-          rbnode<T>* y = z->p->p->left;
-          if (y->color == RED) {
-            z->p->color = BLACK;
-            y->color = BLACK;
-            z->p->p->color = RED;
-            z = z->p->p;
           } else {
-            if (z == z->p->left) {
-              z = z->p;
-              rightRotate(z);
+            rbnode<T>* y = z->p->p->left;
+            if (y->color == RED) {
+              z->p->color = BLACK;
+              y->color = BLACK;
+              z->p->p->color = RED;
+              z = z->p->p;
+            } else {
+              if (z == z->p->left) {
+                z = z->p;
+                rightRotate(z);
+              }
+              z->p->color = BLACK;
+              z->p->p->color = RED;
+              leftRotate(z->p->p);
             }
-            z->p->color = BLACK;
-            z->p->p->color = RED;
-            leftRotate(z->p->p);
           }
         }
-      }
       root->color = BLACK;
     };
 
@@ -312,6 +318,14 @@ class rbtree{
       y->right = x;
       x->p = y;
     };
+
+    void deleteTree(rbnode<T>* x){
+      if (x != nil) {
+        deleteTree(x->left);
+        deleteTree(x->right);
+        delete x;
+      }
+    }
 
 };
 

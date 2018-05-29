@@ -2,21 +2,27 @@
 #define HASH_CLASS
 #include <list>
 #include <vector>
-
+#include <iostream>
+using namespace std;
 template <typename T>
 
 class hasht{
 	public:
 		hasht(int nEntradas){
+			numEntradas = nEntradas;
+			tabla.resize(numEntradas);
 		};
 			// Constructor que especifica el numero de cubetas (entradas)
 			// en la tabla
 
-		hasht(const hash<T>& obj){ 
+		hasht(const hasht<T>& obj){
+			tabla = obj.tabla;
+			numEntradas = obj.numEntradas;
 		};
 			// Constructor copia
 
 		~hasht(){
+			tabla.clear();
 		};
 			// Destructor (borra la tabla)
 

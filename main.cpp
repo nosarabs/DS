@@ -4,6 +4,7 @@
 #include "hasht.h"
 #include <stdio.h>
 #include <time.h>
+#define tam 1000000
 
 int main () {
 
@@ -27,26 +28,33 @@ int main () {
   // }
   // std::cout << conta << '\n';
 
-  // rbtree<int> r;
-  //r.secTree(); // arbol de prueba
-  // rbnode<int> * x = new rbnode<int>(6);
-  // rbnode<int> * y = new rbnode<int>(7);
-  // rbnode<int> * z = new rbnode<int>(8);
-  // r.treeInsert(x);
-  // r.treeInsert(y);
-  // r.treeInsert(z);
-  // r.inorderTreeWalk(r.getRoot(), s);
-  // r.print(s);
+  //rbtree<int> r;
+  hasht<int> h(tam);
+
+  for (int i = 0; i<tam-1; ++i) {
+    //int num = rand() % (tam * 2 + 1);
+    h.insert(i);
+  }
+  std::cout << "CREADO" << '\n';
+
+  int conta = 0;
+  int num1;
+  long x = time(NULL);
+  long y = x + 10;
+  while (x < y) {
+    num1 = rand() % (tam * 2 + 1);
+    h.search(num1);
+    ++conta;
+    x = time(NULL);
+  }
+  std::cout << conta << '\n';
 
 
 
 
-  hasht<int> x(5);
-  x.insert(1);
-  x.insert(2);
-  x.insert(3);
 
-  hasht<int> h(x);
+
+
 
 
 }

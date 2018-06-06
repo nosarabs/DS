@@ -197,24 +197,9 @@ class rbtree{
 
     void print(stack<T> & pila) {
       while (!pila.empty()) {
+        pila.pop();
         cout << pila.top() << "  |  ";
         pila.pop();
-      }
-    };
-
-    void secTree () {
-      rbnode<T> * x = root;
-      for (int i = 0; i < MAX; ++i) {
-        rbnode<T> * n = new rbnode<T>(i);
-        if (x == nil) {
-          root = n;
-          n->color = BLACK;
-        } else {
-          n->p = x;
-          x->right = n;
-          n->color = RED;
-        }
-        x = n;
       }
     };
 
